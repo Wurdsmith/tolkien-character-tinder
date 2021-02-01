@@ -1,7 +1,7 @@
 require 'pry'
 require 'httparty'
 
-require (..lib/characters)
-require (..lib/lotr_api)
-require(..lib/tinder_cli)
+require_relative('../lib/characters')
+require_relative('../lib/lotr_api')
+require_relative('../lib/tinder_cli')
 
