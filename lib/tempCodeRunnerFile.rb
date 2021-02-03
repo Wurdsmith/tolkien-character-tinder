@@ -18,11 +18,18 @@ class Lotr_api
   end
 
 @@character_hash.each do |key, value|
+  if value.class != Integer
   value.each do |character_stats|
     if @@unique_characters_with_quotes.include? character_stats["_id"]
       @@character_list_with_stats << character_stats
     end
   end
-  binding.pry
+  end
 end
+
+  def self.get_characters_by_race(input_1, input_2, input_3)
+    character_list = @@_character_list_with_stats
+    
+
+  end
 end

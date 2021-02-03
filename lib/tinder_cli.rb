@@ -6,12 +6,15 @@ class Tinder_cli
         self.race_preference_prompt
     end
 
-    def race_preference_promt
-        puts "Please select input the three fictional races that most interest you."
-        puts "Your choices: Human, Elf, Hobbit, Dwarf, Orc, Wizard"
-        puts "Be sure to separate your choices with a comma! *Example: Human, Hobbit, Elf."
+    def race_preference_prompt
+        puts "Please input the three fictional races that most interest you."
+        puts "Your choices: Human, Elf, Hobbit, Dwarf, Orc, Wizard, Ent"
         puts "Happy hunting!"
-        input = gets.strip
+        input_1 = gets.strip
+        input_2 = gets.strip
+        input_3 = gets.strip
+
+        Lotr_api.get_characters_by_race(input_1, input_2, input_3)
     end
 end
 
