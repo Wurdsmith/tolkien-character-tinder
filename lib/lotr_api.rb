@@ -40,7 +40,8 @@ class Lotr_api
       elsif character["race"] == input_3
         requested_characters << character
       end
+    
     end
-    binding.pry
+    Characters.new(requested_characters)
   end
 end
