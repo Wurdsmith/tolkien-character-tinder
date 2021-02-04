@@ -20,7 +20,7 @@ def self.unique_characters_with_quotes
   quote_array
 end
 
-
+#Builds a list of characters with movie quotes that will be used in our app. This eliminates a large percentage of characters wihtout any attributes or quotes, increasing the functionality of our app.
 def self.character_list_with_stats
   character_array =[]
   @@character_hash.each do |key, value|
@@ -35,6 +35,7 @@ def self.character_list_with_stats
   character_array
 end
 
+  #Creates a custom list of potential matches (characters and attributes) based on the user's fictional race preferences.
   def self.get_characters_by_race(input_1, input_2, input_3)
     arr =[]
     arr += [input_1, input_2, input_3]
@@ -55,4 +56,9 @@ end
     end
       chr_obj_arr
   end
+
+  #Requests a random movie quote based on the character that the user chooses to 'swipe right' and start a conversation with.
+  def quote_getter(character_id)
+  end
+
 end
