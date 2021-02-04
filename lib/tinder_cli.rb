@@ -13,10 +13,21 @@ class Tinder_cli
         input_1 = gets.strip
         input_2 = gets.strip
         input_3 = gets.strip
-        
-        Lotr_api.get_characters_by_race(input_1, input_2, input_3)
+        character_preferences = Lotr_api.get_characters_by_race(input_1, input_2, input_3)
+        self.character_viewer(character_preferences)
+        binding.pry
     end
+
+    def character_viewer(character_preferences)
+        # bring selected characters array by invoking get_characters_by_race method(array of characters hashes)
+        arr = [{}, {}, {}]
+        puts "Your first match is..."
+        # show info of the first el: arr[0] = {1}
+        arr[1]
+    end
+
 end
+
 
 
 
