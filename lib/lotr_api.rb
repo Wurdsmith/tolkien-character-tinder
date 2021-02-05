@@ -54,11 +54,22 @@ end
     requested_characters.each do |character|
       chr_obj_arr << Character.new(character)
     end
-      chr_obj_arr
+      chr_obj_arr.shuffle #shuffles the returned characters for variety when a user goes uses the app more than once.
   end
 
   #Requests a random movie quote based on the character that the user chooses to 'swipe right' and start a conversation with.
-  def quote_getter(character_id)
+  def self.quote_getter(character_id)
+    quote_obj_array = []
+    @@quote_hash.each do |key, value|
+      if value.class != Integer
+        value.each do |quote|
+          if quote["character"] == character_id
+            quote_obj_array << quote["dialog"].split.join(" ") #The quotes provided through the API have some grammatical issues, including a tendency to have large sections of whitespace. This fixes that.
+          end
+        end
+      end
+    end
+    quote_obj_array.sample
   end
 
 end
