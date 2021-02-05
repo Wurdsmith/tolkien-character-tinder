@@ -1,5 +1,6 @@
 class Tinder_cli
-    #Our standard welcome message.
+    
+    #A standard welcome message.
     def welcome
         puts ""
         puts "Thank you for signing up for Tolkien Tinder!" 
@@ -25,6 +26,7 @@ class Tinder_cli
 
     end
 
+    #Takes in an array of characters based on the user's fictional race preferences and allows them to view more information about a particular character, and to start a conversation, if desired.
     def character_viewer(character_preferences)
         count = 0
         while count < character_preferences.length
