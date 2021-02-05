@@ -14,9 +14,44 @@ class Tinder_cli
         puts ""
         puts "Your choices: Human, Elf, Hobbit, Dwarf, Orc, Maiar, Ent"
         puts ""
-        input_1 = gets.strip
-        input_2 = gets.strip
-        input_3 = gets.strip
+        puts "Please input your first race."
+        puts ""
+        input_1 = gets.strip 
+            while input_1 != "Human" && input_1 != "Elf" && input_1 != "Hobbit" && input_1 != "Dwarf" && input_1 != "Orc" && input_1 != "Maiar" && input_1 != "Ent"
+                puts ""
+                puts "**Error** - Please enter a valid race. Your choices are: Human, Elf, Hobbit, Dwarf, Orc, Maiar, or Ent. These values are case sensitive!"
+                puts "You may repeat races, but be aware that this will significantly limit your pool of potential matches."
+                puts ""
+                puts "Please input your first race."
+                puts ""
+                input_1 = gets.strip
+            end
+        puts ""
+        puts "Please input your second race."
+        puts ""
+        input_2 = gets.strip 
+            while input_2 != "Human" && input_2 != "Elf" && input_2 != "Hobbit" && input_2 != "Dwarf" && input_2 != "Orc" && input_2 != "Maiar" && input_2 != "Ent"
+                    puts ""
+                    puts "**Error** - Please enter a valid race. Your choices are: Human, Elf, Hobbit, Dwarf, Orc, Maiar, or Ent. These values are case sensitive!"
+                    puts "You may repeat races, but be aware that this will significantly limit your pool of potential matches."
+                    puts ""
+                    puts "Please input your second race."
+                    puts ""
+                input_2 = gets.strip
+            end
+        puts ""
+        puts "Please input your third race."
+        puts ""
+        input_3 = gets.strip 
+            while input_3 != "Human" && input_3 != "Elf" && input_3 != "Hobbit" && input_3 != "Dwarf" && input_3 != "Orc" && input_3 != "Maiar" && input_3 != "Ent"
+                    puts ""
+                    puts "**Error** - Please enter a valid race. Your choices are: Human, Elf, Hobbit, Dwarf, Orc, Maiar, or Ent. These values are case sensitive!"
+                    puts "You may repeat races, but be aware that this will significantly limit your pool of potential matches."
+                    puts ""
+                    puts "Please input your third race."
+                    puts ""
+                input_3 = gets.strip
+            end
         character_preferences = Lotr_api.get_characters_by_race(input_1, input_2, input_3)
         puts ""
         puts "You have #{character_preferences.length} potential matches to choose from. Happy hunting!"
@@ -59,9 +94,10 @@ class Tinder_cli
                 elsif input == "no"
                     count += 1
                 end
+            
         end
-    end
 
+    end
 end
 
 
