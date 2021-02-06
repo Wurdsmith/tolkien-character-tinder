@@ -1,6 +1,6 @@
 class Tinder_cli
+    
     #A standard welcome message.
-
     def welcome
         puts ""
         puts "Thank you for signing up for Tolkien Tinder!".colorize(:green)
@@ -32,9 +32,9 @@ class Tinder_cli
         puts ""
         sleep 2
         self.character_viewer(character_preferences)
-
     end
 
+    #validates the user's input to match the case-sensitive keys from the API
     def input_validator(number)
         input = gets.strip 
         while input != "Human" && input != "Elf" && input != "Hobbit" && input != "Dwarf" && input != "Orc" && input != "Maiar" && input != "Ent"
@@ -45,7 +45,7 @@ class Tinder_cli
     end
 
 
-
+    #An error message that will be returned if the user enters the wrong input.
     def input_error_message(number)
         puts ""
         puts "**Error** - Please enter a valid race. Your choices are: Human, Elf, Hobbit, Dwarf, Orc, Maiar, or Ent.".colorize(:red)
@@ -56,6 +56,7 @@ class Tinder_cli
         puts ""
     end
 
+    #Validates user's input for the 'swipe right' and 'swipe left' frunctionality.
     def swipe_validator
         input = gets.strip
         while input != "swipe right" && input != "Swipe right" && input != "swipe left" && input != "Swipe left"
@@ -65,6 +66,7 @@ class Tinder_cli
         input
     end
 
+    #An error message that will be returned if the user enters the wrong input.
     def swipe_error_message(input)
         puts ""
         puts "Invalid input. Please type 'swipe right' to match and begin a conversation, or type 'swipe left' to see your next potential match.".colorize(:red)
@@ -73,6 +75,8 @@ class Tinder_cli
     end
 
     #Takes in an array of characters based on the user's fictional race preferences and allows them to view more information about a particular character, and to start a conversation, if desired.
+    #If a characters decides to 'match' and start a conversation, this method will call on the quote getter method in the API class to pull a random movie quote from their matched character.
+    #It should be noted that due to the nature of the API, there are many typos in said movie quotes, and not every character has assigned values for certain characteristics.
     def character_viewer(character_preferences)
         count = 0
         while count < character_preferences.length
@@ -124,6 +128,8 @@ class Tinder_cli
         puts ""
         puts "Type 'yes' to restart Tolkien Tinder, otherwise type 'no' to exit the program.".colorize(:blue)
         puts ""
+
+        #Allows the character to restart the program, if desired. Otherwise, ends the program.
             loop do
                 input = gets.strip
                 if input == "yes" || input == "Yes"
