@@ -1,33 +1,34 @@
 class Tinder_cli
-    
     #A standard welcome message.
+
     def welcome
         puts ""
-        puts "Thank you for signing up for Tolkien Tinder!" 
-        puts "From the Shire to Gondor, there are many fine matches to be had in Middle Earth."
+        puts "Thank you for signing up for Tolkien Tinder!".colorize(:green)
+        puts "From the Shire to Gondor, there are many fine matches to be had in Middle Earth.".colorize(:green)
         self.race_preference_prompt
     end
 
     #Prompts the user to select three preferred, fictional races to filter their matches into a smaller, customized list.
     def race_preference_prompt
-        puts "Please input the three fictional races that most interest you."
         puts ""
-        puts "Your choices: Human, Elf, Hobbit, Dwarf, Orc, Maiar, Ent"
+        puts "Please input the three fictional races that most interest you.".colorize(:green)
         puts ""
-        puts "Please input your first race."
+        puts "Your choices: Human, Elf, Hobbit, Dwarf, Orc, Maiar, Ent".colorize(:blue)
+        puts ""
+        puts "Please input your first race.".colorize(:blue)
         puts ""
         input_1 = input_validator("first")
         puts ""
-        puts "Please input your second race."
+        puts "Please input your second race.".colorize(:blue)
         puts ""
         input_2 = input_validator("second")
         puts ""
-        puts "Please input your third race."
+        puts "Please input your third race.".colorize(:blue)
         puts ""
         input_3 = input_validator("third")
         character_preferences = Lotr_api.get_characters_by_race(input_1, input_2, input_3)
         puts ""
-        puts "You have #{character_preferences.length} potential matches to choose from. Happy hunting!"
+        puts "You have #{character_preferences.length} potential matches to choose from. Happy hunting!".colorize(:green)
         puts ""
         sleep 2
         self.character_viewer(character_preferences)
@@ -35,22 +36,23 @@ class Tinder_cli
     end
 
     def input_validator(number)
-        input_1 = gets.strip 
-        while input_1 != "Human" && input_1 != "Elf" && input_1 != "Hobbit" && input_1 != "Dwarf" && input_1 != "Orc" && input_1 != "Maiar" && input_1 != "Ent"
+        input = gets.strip 
+        while input != "Human" && input != "Elf" && input != "Hobbit" && input != "Dwarf" && input != "Orc" && input != "Maiar" && input != "Ent"
             self.input_error_message(number)
-            input_1 = gets.strip
+            input = gets.strip
         end
-        input_1
+        input
     end
 
 
 
     def input_error_message(number)
         puts ""
-        puts "**Error** - Please enter a valid race. Your choices are: Human, Elf, Hobbit, Dwarf, Orc, Maiar, or Ent. These values are case sensitive!"
-        puts "You may repeat races, but be aware that this will significantly limit your pool of potential matches."
+        puts "**Error** - Please enter a valid race. Your choices are: Human, Elf, Hobbit, Dwarf, Orc, Maiar, or Ent.".colorize(:red)
+        puts "Please note that these values are case sensitive!".colorize(:red).bold
+        puts "You may repeat races, but be aware that this will significantly limit your pool of potential matches.".colorize(:red)
         puts ""
-        puts "Please input your #{number} race."
+        puts "Please input your #{number} race.".colorize(:blue)
         puts ""
     end
 
@@ -65,7 +67,7 @@ class Tinder_cli
 
     def swipe_error_message(input)
         puts ""
-        puts "Invalid input. Please type 'swipe right' to match and begin a conversation, or type 'swipe left' to see your next potential match."
+        puts "Invalid input. Please type 'swipe right' to match and begin a conversation, or type 'swipe left' to see your next potential match.".colorize(:red)
         puts ""
         input
     end
@@ -75,32 +77,33 @@ class Tinder_cli
         count = 0
         while count < character_preferences.length
             puts ""
-            puts "Your next potential match is: #{character_preferences [count].name}. Would you like to know more?"
+            puts "Your next potential match is: #{character_preferences [count].name}. Would you like to know more about them?".colorize(:green)
             puts ""
-            puts "Type 'yes' to learn more, or type 'no' see your next potential match!"
+            puts "Type 'yes' to learn more, or type 'no' see your next potential match!".colorize(:blue)
+            puts ""
             puts ""
             input = gets.strip
                 if input == "yes" || input == "Yes"
                     puts ""
-                    puts "#{character_preferences[count].name}"
-                    puts "Race = #{character_preferences[count].race}"
-                    puts "Gender = #{character_preferences[count].gender}"
-                    puts "Birthday = #{character_preferences[count].birth}"
-                    puts "Realm = #{character_preferences[count].realm}"
-                    puts "Height = #{character_preferences[count].height}"
-                    puts "Hair color = #{character_preferences[count].hair}"
+                    puts "#{character_preferences[count].name}".colorize(:yellow)
+                    puts "Race = #{character_preferences[count].race}".colorize(:yellow)
+                    puts "Gender = #{character_preferences[count].gender}".colorize(:yellow)
+                    puts "Birthday = #{character_preferences[count].birth}".colorize(:yellow)
+                    puts "Realm = #{character_preferences[count].realm}".colorize(:yellow)
+                    puts "Height = #{character_preferences[count].height}".colorize(:yellow)
+                    puts "Hair color = #{character_preferences[count].hair}".colorize(:yellow)
                     puts ""
-                    puts "Type 'swipe right' to match and to start a conversation. Otherwise, type 'swipe left' to see your next potential match!"
+                    puts "Type 'swipe right' to match and to start a conversation. Otherwise, type 'swipe left' to see your next potential match!".colorize(:blue)
                     puts ""
                     input = self.swipe_validator
                         if input == "swipe right" || input == "Swipe right"
                             quote = Lotr_api.quote_getter(character_preferences[count]._id)
                                 puts ""
-                                puts "You succesfully matched with #{character_preferences [count].name}. Beginning conversation..."
+                                puts "You succesfully matched with #{character_preferences [count].name}. Beginning conversation...".colorize(:green)
                                 puts ""
-                                puts "#{character_preferences [count].name} says: #{quote}"
+                                puts "#{character_preferences [count].name} says: #{quote}".colorize(:yellow)
                                 puts ""
-                                sleep 4
+                                sleep 3
                                 count += 1
                         elsif input =="swipe left" || input == "Swipe right"
                             count += 1
@@ -111,14 +114,30 @@ class Tinder_cli
                     count += 1
                 else
                     puts ""
-                    puts "Invalid input. Please enter either 'yes' or 'no' to continue."
+                    puts "Invalid input. Please enter either 'yes' or 'no' to continue.".colorize(:red)
                 end
-            
         end
         puts ""
-        puts "Thank you for using Tolkien Tinder! "
-        puts""
-
+        puts "Thank you for using Tolkien Tinder!".colorize(:green)
+        puts ""
+        puts "Would you like to look for love in Middle Earth again?".colorize(:green)
+        puts ""
+        puts "Type 'yes' to restart Tolkien Tinder, otherwise type 'no' to exit the program.".colorize(:blue)
+        puts ""
+            loop do
+                input = gets.strip
+                if input == "yes" || input == "Yes"
+                Tinder_cli.new.welcome
+                elsif input ==  "no" || input == "No"
+                    puts""
+                    puts "Farewell!".colorize(:green)
+                    break
+                else
+                    puts ""
+                    puts "Invalid input. Type 'yes' to restart Tolkien Tinder, otherwise type 'no' to exit the program.".colorize(:red)
+                end
+            end
+        
     end
     
 end
