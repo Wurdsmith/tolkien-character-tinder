@@ -3,8 +3,10 @@ class Tinder_cli
     #A standard welcome message.
     def welcome
         puts ""
-        puts "Thank you for signing up for Tolkien Tinder!".colorize(:green)
-        puts "From the Shire to Gondor, there are many fine matches to be had in Middle Earth.".colorize(:green)
+        puts "Thank you for signing up for Tolkien Tinder!".colorize(:green).bold.underline
+        puts ""
+        puts "From the Shire to Gondor, there are many fine matches to be had in Middle Earth. Find your fictional soulmate and strike up a conversation with them today!".colorize(:green)
+        puts "**Please note that Tolkien Tinder does not take responsibility for the actions of beliefs of its users, especially those who subscribe to the way of Sauron.**".colorize(:green).italic
         self.race_preference_prompt
     end
 
@@ -105,7 +107,7 @@ class Tinder_cli
                                 puts ""
                                 puts "You succesfully matched with #{character_preferences [count].name}. Beginning conversation...".colorize(:green)
                                 puts ""
-                                puts "#{character_preferences [count].name} says: #{quote}".colorize(:yellow)
+                                puts "#{character_preferences [count].name} says: #{quote}".colorize(:magenta)
                                 puts ""
                                 sleep 3
                                 count += 1
