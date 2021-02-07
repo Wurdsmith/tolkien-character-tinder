@@ -91,6 +91,7 @@ class Tinder_cli
             input = gets.strip
                 if input == "yes" || input == "Yes"
                     puts ""
+                    puts "-----------------------------------------------------------------------".colorize(:yellow)
                     puts "#{character_preferences[count].name}".colorize(:yellow).bold
                     puts "Race = #{character_preferences[count].race}".colorize(:yellow)
                     puts "Gender = #{character_preferences[count].gender}".colorize(:yellow)
@@ -98,6 +99,9 @@ class Tinder_cli
                     puts "Realm = #{character_preferences[count].realm}".colorize(:yellow)
                     puts "Height = #{character_preferences[count].height}".colorize(:yellow)
                     puts "Hair color = #{character_preferences[count].hair}".colorize(:yellow)
+                    puts "-----------------------------------------------------------------------".colorize(:yellow)
+                    puts ""
+                    puts "Want to creep on #{character_preferences[count].name}? Learn more about them by visiting #{character_preferences[count].wikiUrl}".colorize(:green)
                     puts ""
                     puts "Type 'swipe right' to match and to start a conversation. Otherwise, type 'swipe left' to see your next potential match!".colorize(:blue)
                     puts ""

@@ -7,7 +7,7 @@ class Lotr_api
 @@character_hash = HTTParty.get('https://the-one-api.dev/v2/character', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 @@quote_hash = HTTParty.get('https://the-one-api.dev/v2/quote', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 
-
+binding.pry
 #Creates a list of character IDs from a very large list of movie quotes. Repeated character IDs will not be included because we will be building our character list 
 #with these values.
 def self.unique_characters_with_quotes
@@ -67,7 +67,10 @@ end
       if value.class != Integer
         value.each do |quote|
           if quote["character"] == character_id
-            quote_obj_array << quote["dialog"].split.join(" ") #The quotes provided through the API have some grammatical issues, including a tendency to have large sections of whitespace. This fixes that.
+            quote["dialog"].split.join(" ") #The quotes provided through the API have some grammatical issues, including a tendency to have large sections of whitespace. This fixes that.
+            quote["dialog"].gsub %r{^,+|,+$}
+            quote_obj_array 
+            quote_obj_array
           end
         end
       end
