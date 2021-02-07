@@ -13,7 +13,7 @@ class Tinder_cli
     #Prompts the user to select three preferred, fictional races to filter their matches into a smaller, customized list.
     def race_preference_prompt
         puts ""
-        puts "Please input the three fictional races that most interest you.".colorize(:green)
+        puts "Please input the three fictional races that interest you most.".colorize(:green)
         puts ""
         puts "Your choices: Human, Elf, Hobbit, Dwarf, Orc, Maiar, Ent".colorize(:blue)
         puts ""
