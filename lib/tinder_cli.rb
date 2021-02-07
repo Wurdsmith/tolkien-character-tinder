@@ -122,9 +122,10 @@ class Tinder_cli
                         end
                 elsif input ==  "no" || input == "No"
                     count += 1
+                
                 else
                     puts ""
-                    puts "Invalid input. Please enter either 'yes' or 'no' to continue.".colorize(:red)
+                    puts "Invalid input. Please enter either 'yes' or 'no' to continue.".colorize(:red) #An error message that will be returned if the user enters the wrong input.
                 end
         end
         puts ""
@@ -135,7 +136,7 @@ class Tinder_cli
         puts "Type 'yes' to restart Tolkien Tinder, otherwise type 'no' to exit the program.".colorize(:blue)
         puts ""
 
-        #Allows the character to restart the program, if desired. Otherwise, ends the program.
+            #Allows the character to restart the program, if desired. Otherwise, ends the program.
             loop do
                 input = gets.strip
                 if input == "yes" || input == "Yes"

@@ -7,7 +7,7 @@ class Lotr_api
 @@character_hash = HTTParty.get('https://the-one-api.dev/v2/character', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 @@quote_hash = HTTParty.get('https://the-one-api.dev/v2/quote', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 
-binding.pry
+
 #Creates a list of character IDs from a very large list of movie quotes. Repeated character IDs will not be included because we will be building our character list 
 #with these values.
 def self.unique_characters_with_quotes
@@ -31,6 +31,13 @@ def self.character_list_with_stats
     value.each do |character_stats|
       if self.unique_characters_with_quotes.include? character_stats["_id"]
           character_array << character_stats
+            character_array.each do |character|
+              character.each do |key, attribute| #This sets the character's attributes to 'not provided' if the API (or the Tolkien-verse) doesn't supply a value.
+                if attribute == ""
+                  character[key] = "Not provided"
+                end
+              end
+            end
         end
       end
     end
@@ -74,7 +81,7 @@ end
         end
       end
     end
-    quote_obj_array.sample
+    quote_obj_array.sample #This will return a random quote that matches the character ID sent from the CLI.
   end
 
 end
