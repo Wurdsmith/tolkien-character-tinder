@@ -6,7 +6,7 @@ class Tinder_cli
         puts "Thank you for signing up for Tolkien Tinder!".colorize(:green).bold.underline
         puts ""
         puts "From the Shire to Gondor, there are many fine matches to be had in Middle Earth. Find your fictional soulmate and strike up a conversation with them today!".colorize(:green)
-        puts "**Please note that Tolkien Tinder does not take responsibility for the actions of beliefs of its users, especially those who subscribe to the way of Sauron.**".colorize(:green).italic
+        puts "**Please note that Tolkien Tinder does not take responsibility for the actions or beliefs of its users, especially those who subscribe to the way of Sauron.**".colorize(:light_blue).italic
         self.race_preference_prompt
     end
 

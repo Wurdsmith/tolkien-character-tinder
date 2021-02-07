@@ -67,9 +67,8 @@ end
       if value.class != Integer
         value.each do |quote|
           if quote["character"] == character_id
-            quote["dialog"].split.join(" ") #The quotes provided through the API have some grammatical issues, including a tendency to have large sections of whitespace. This fixes that.
-            quote["dialog"].gsub %r{^,+|,+$}
-            quote_obj_array 
+            quote["character"].chomp(",")
+            quote_obj_array << quote["dialog"].split.join(" ") #The quotes provided through the API often have some grammatical issues, including a tendency to have large sections of whitespace. This addresses that (to some extent).
             quote_obj_array
           end
         end
