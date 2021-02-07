@@ -77,7 +77,7 @@ class Tinder_cli
     end
 
     #Takes in an array of characters based on the user's fictional race preferences and allows them to view more information about a particular character, and to start a conversation, if desired.
-    #If a characters decides to 'match' and start a conversation, this method will call on the quote getter method in the API class to pull a random movie quote from their matched character.
+    #If the user decides to 'match' and start a conversation, this method will call on the quote getter method in the API class to pull a random movie quote from their matched character.
     #It should be noted that due to the nature of the API, there are many typos in said movie quotes, and not every character has assigned values for certain characteristics.
     def character_viewer(character_preferences)
         count = 0
@@ -91,7 +91,7 @@ class Tinder_cli
             input = gets.strip
                 if input == "yes" || input == "Yes"
                     puts ""
-                    puts "#{character_preferences[count].name}".colorize(:yellow)
+                    puts "#{character_preferences[count].name}".colorize(:yellow).bold
                     puts "Race = #{character_preferences[count].race}".colorize(:yellow)
                     puts "Gender = #{character_preferences[count].gender}".colorize(:yellow)
                     puts "Birthday = #{character_preferences[count].birth}".colorize(:yellow)
