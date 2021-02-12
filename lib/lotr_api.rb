@@ -6,6 +6,7 @@ class Lotr_api
 @@character_hash = HTTParty.get('https://the-one-api.dev/v2/character', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 @@quote_hash = HTTParty.get('https://the-one-api.dev/v2/quote', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 
+binding.pry
 
 #Creates a list of character IDs from a very large list of movie quotes. Repeated character IDs will not be included because we will be building our character list with these values.
 def self.unique_characters_with_quotes
@@ -13,7 +14,7 @@ def self.unique_characters_with_quotes
   @@quote_hash.each do |key, value|
     if value.class != Integer
     value.collect do |quote| 
-       quote_array <<  quote["character"] unless quote_array.include? quote["character"]
+       quote_array <<  quote["character"] unless quote_array.include? quote["character"] # This value matches to the "_id" value in the character hash.
       end
     end
   end
@@ -26,7 +27,7 @@ def self.character_list_with_stats
   character_array =[]
   @@character_hash.each do |key, value|
     if value.class != Integer
-    value.each do |character_stats|
+    value.each do |character_stats| #Character_stats is a hash containing keys that point to character attributes.
       if self.unique_characters_with_quotes.include? character_stats["_id"]
           character_array << character_stats
             character_array.each do |character|
