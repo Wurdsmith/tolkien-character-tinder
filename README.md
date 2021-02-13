@@ -1,4 +1,4 @@
-#WHAT IS TOLKIEN TINDER?
+# WHAT IS TOLKIEN TINDER?
 
 Tolkien Tinder is simple, somewhat goofy CLI app that brings the digital dating world to Middle Earth.
 

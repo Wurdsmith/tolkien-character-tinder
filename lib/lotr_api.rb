@@ -1,19 +1,16 @@
-require 'httparty'
-require 'pry'
 class Lotr_api
 
 #Setting class variables equal to a list of quotes and characters. The character list contains every character in the Tolkien unverse, and needs to be cut down so that it only includes characters with quotes in the final CLI app.
 @@character_hash = HTTParty.get('https://the-one-api.dev/v2/character', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 @@quote_hash = HTTParty.get('https://the-one-api.dev/v2/quote', headers: {"Authorization" => "Bearer Bw68B-g1vre-EFiDydiG"})
 
-binding.pry
-
 #Creates a list of character IDs from a very large list of movie quotes. Repeated character IDs will not be included because we will be building our character list with these values.
 def self.unique_characters_with_quotes
+ 
   quote_array = [] 
   @@quote_hash.each do |key, value|
     if value.class != Integer
-    value.collect do |quote| 
+    value.each do |quote| 
        quote_array <<  quote["character"] unless quote_array.include? quote["character"] # This value matches to the "_id" value in the character hash.
       end
     end
@@ -24,16 +21,19 @@ end
 #Builds a list of characters based on the character IDs returned by the unique_characters_with_quotes method, which match up with each character hash in the @@character_hash class variable.
 #This eliminates a large percentage of characters without any attributes or quotes, increasing the functionality of the app.
 def self.character_list_with_stats
+  puts "------------------ API CALL --------------------------"
   character_array =[]
   @@character_hash.each do |key, value|
     if value.class != Integer
     value.each do |character_stats| #Character_stats is a hash containing keys that point to character attributes.
       if self.unique_characters_with_quotes.include? character_stats["_id"]
           character_array << character_stats
-            character_array.each do |character|
-              character.each do |key, attribute| #This sets the character's attributes to 'not provided' if the API (or Tolkien himself) didn't supply a value.
+
+
+            character_array.each do |character_stats|
+              character_stats.each do |key, attribute| #This sets the character's attributes to 'not provided' if the API (or Tolkien himself) didn't supply a value.
                 if attribute == ""
-                  character[key] = "Not provided"
+                  character_stats[key] = "Not provided"
                 end
               end
             end
@@ -49,7 +49,7 @@ end
     arr =[]
     arr += [input_1, input_2, input_3]
     requested_characters = []
-    character_list = self.character_list_with_stats
+    character_list = self.character_list_with_stats #This ensures that only races with quotes are returned by calling on the character_list_with_stats method.
     character_list.each do |character|
       if character["race"] == input_1
         requested_characters << character

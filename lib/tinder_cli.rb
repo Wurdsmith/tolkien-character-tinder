@@ -30,10 +30,11 @@ class Tinder_cli
         input_3 = input_validator("third")
         character_preferences = Lotr_api.get_characters_by_race(input_1, input_2, input_3)
         puts ""
-        puts "You have #{character_preferences.length} potential matches to choose from. Happy hunting!".colorize(:green)
+        puts "You have #{character_preferences.length} potential matches to choose from. Happy hunting!".colorize(:green) #Returns the length of the array of class objects to the user, indicating their number of matches.
         puts ""
         sleep 2
         self.character_viewer(character_preferences)
+        
     end
 
     #validates the user's input to match the case-sensitive keys from the API
@@ -140,17 +141,22 @@ class Tinder_cli
             loop do
                 input = gets.strip
                 if input == "yes" || input == "Yes"
-                Tinder_cli.new.welcome
+                    self.race_preference_prompt # => Start agian 
+                    exit?(input) 
                 elsif input ==  "no" || input == "No"
                     puts""
                     puts "Farewell!".colorize(:green)
-                    break
+                    exit
                 else
                     puts ""
                     puts "Invalid input. Type 'yes' to restart Tolkien Tinder, otherwise type 'no' to exit the program.".colorize(:red)
                 end
             end
         
+            def exit?(input)
+                exit if input.downcase == "exit"
+            end
+
     end
     
 end
