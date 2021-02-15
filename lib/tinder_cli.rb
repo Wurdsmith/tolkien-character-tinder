@@ -7,13 +7,16 @@ class Tinder_cli
         puts ""
         puts "From the Shire to Gondor, there are many fine matches to be had in Middle Earth. Find your fictional soulmate and strike up a conversation with them today!".colorize(:green)
         puts "**Please note that Tolkien Tinder does not take responsibility for the actions or beliefs of its users, especially those who subscribe to the way of Sauron.**".colorize(:light_blue).italic
+        puts ""
+        puts "You can type 'exit' at any time to exit this program.".colorize(:yellow)
+        Lotr_api.get_characters
         self.race_preference_prompt
     end
 
     #Prompts the user to select three preferred, fictional races to filter their matches into a smaller, customized list.
     def race_preference_prompt
         puts ""
-        puts "Please input the three fictional races that interest you most.".colorize(:green)
+        puts "Please input the three fictional races that interest you most.".colorize(:green).underline
         puts ""
         puts "Your choices: Human, Elf, Hobbit, Dwarf, Orc, Maiar, Ent".colorize(:blue)
         puts ""
@@ -28,7 +31,7 @@ class Tinder_cli
         puts "Please input your third race.".colorize(:blue)
         puts ""
         input_3 = input_validator("third")
-        character_preferences = Lotr_api.get_characters_by_race(input_1, input_2, input_3)
+        character_preferences = Character.find_by_race(input_1, input_2, input_3)
         puts ""
         puts "You have #{character_preferences.length} potential matches to choose from. Happy hunting!".colorize(:green) #Returns the length of the array of class objects to the user, indicating their number of matches.
         puts ""
@@ -39,10 +42,12 @@ class Tinder_cli
 
     #validates the user's input to match the case-sensitive keys from the API
     def input_validator(number)
-        input = gets.strip 
+        input = gets.strip
+        self.exit?(input)  
         while input != "Human" && input != "Elf" && input != "Hobbit" && input != "Dwarf" && input != "Orc" && input != "Maiar" && input != "Ent"
             self.input_error_message(number)
             input = gets.strip
+            self.exit?(input) 
         end
         input
     end
@@ -62,9 +67,11 @@ class Tinder_cli
     #Validates user's input for the 'swipe right' and 'swipe left' frunctionality.
     def swipe_validator
         input = gets.strip
+        self.exit?(input) 
         while input != "swipe right" && input != "Swipe right" && input != "swipe left" && input != "Swipe left"
             self.swipe_error_message(input)
             input = gets.strip
+            self.exit?(input) 
         end
         input
     end
@@ -90,6 +97,7 @@ class Tinder_cli
             puts ""
             puts ""
             input = gets.strip
+            self.exit?(input) 
                 if input == "yes" || input == "Yes"
                     puts ""
                     puts "-----------------------------------------------------------------------".colorize(:yellow)
@@ -140,9 +148,9 @@ class Tinder_cli
             #Allows the character to restart the program, if desired. Otherwise, ends the program.
             loop do
                 input = gets.strip
+                self.exit?(input) 
                 if input == "yes" || input == "Yes"
-                    self.race_preference_prompt # => Start agian 
-                    exit?(input) 
+                    self.race_preference_prompt # => Start again  
                 elsif input ==  "no" || input == "No"
                     puts""
                     puts "Farewell!".colorize(:green)
@@ -153,10 +161,10 @@ class Tinder_cli
                 end
             end
         
-            def exit?(input)
-                exit if input.downcase == "exit"
-            end
 
+    end
+    def exit?(input)
+        exit if input.downcase == "exit"
     end
     
 end

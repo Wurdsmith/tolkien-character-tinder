@@ -6,7 +6,6 @@ class Lotr_api
 
 #Creates a list of character IDs from a very large list of movie quotes. Repeated character IDs will not be included because we will be building our character list with these values.
 def self.unique_characters_with_quotes
- 
   quote_array = [] 
   @@quote_hash.each do |key, value|
     if value.class != Integer
@@ -21,15 +20,12 @@ end
 #Builds a list of characters based on the character IDs returned by the unique_characters_with_quotes method, which match up with each character hash in the @@character_hash class variable.
 #This eliminates a large percentage of characters without any attributes or quotes, increasing the functionality of the app.
 def self.character_list_with_stats
-  puts "------------------ API CALL --------------------------"
   character_array =[]
   @@character_hash.each do |key, value|
     if value.class != Integer
     value.each do |character_stats| #Character_stats is a hash containing keys that point to character attributes.
       if self.unique_characters_with_quotes.include? character_stats["_id"]
           character_array << character_stats
-
-
             character_array.each do |character_stats|
               character_stats.each do |key, attribute| #This sets the character's attributes to 'not provided' if the API (or Tolkien himself) didn't supply a value.
                 if attribute == ""
@@ -45,25 +41,11 @@ def self.character_list_with_stats
 end
 
   #Creates a custom list of potential matches (characters and attributes) based on the user's fictional race preferences.
-  def self.get_characters_by_race(input_1, input_2, input_3)
-    arr =[]
-    arr += [input_1, input_2, input_3]
-    requested_characters = []
+  def self.get_characters
     character_list = self.character_list_with_stats #This ensures that only races with quotes are returned by calling on the character_list_with_stats method.
     character_list.each do |character|
-      if character["race"] == input_1
-        requested_characters << character
-      elsif character["race"] == input_2
-        requested_characters << character
-      elsif character["race"] == input_3
-        requested_characters << character
-      end
+    Character.new(character)
     end
-    chr_obj_arr = []
-    requested_characters.each do |character|
-      chr_obj_arr << Character.new(character)
-    end
-      chr_obj_arr.shuffle #shuffles the returned characters for variety when a user uses the app more than once.
   end
 
   #Requests a random movie quote based on the character that the user chooses to 'swipe right' and start a conversation with.

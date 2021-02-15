@@ -6,12 +6,28 @@ class Character
             self.class.attr_accessor(key)
             self.send(("#{key}="), value)
         }
+        @@all << self
     end
 
-    ## LIVE CODING : AFTER ALL CHARACTERS HAVE BEEN CREASTED STORED INSIDE OF @@ALL NOT HASHES
-    ## CREATE A METHOD THAT FINDS A CHARACTER BY THERE
+    def self.find_by_race(input_1, input_2, input_3)
+        requested_characters = []
+        @@all.each do |character|
+            if character.race == input_1
+                requested_characters << character
+            elsif character.race == input_2
+                requested_characters << character
+            elsif character.race == input_3
+                requested_characters << character
+            end
+            
+        end
+        requested_characters.shuffle
+    end
 
-    # MAIN THEME IS OOD 
+    ## LIVE CODING : AFTER ALL CHARACTERS HAVE BEEN CREATED STORED INSIDE OF @@ALL NOT HASHES.
+    ## CREATE A METHOD THAT FINDS A CHARACTER BY THEIR RACE.
+
+    # MAIN THEME IS OOD.
 end
 
 
